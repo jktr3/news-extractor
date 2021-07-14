@@ -26,5 +26,3 @@ class Article:
     if self.content is None:
       self.content = eval(self.parser)(self.get_soup())
     return self.content
-
-# ",".join([e.get_text() for e in soup.find_all("div", {"class":"zn-body__paragraph"})])
