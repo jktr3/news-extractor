@@ -1,6 +1,6 @@
-from network.network import Network
-from network.article import Article
+from network import Network
 from utils import read_yml
+import timeit
 
 cfg = read_yml('config.yml')
 
@@ -9,7 +9,12 @@ networks = {
     sitemap_url = o['sitemap_url'],
     name = n,
     xml_parser = o['xml_parser'],
-    article_parser=o['article_parser']) for n, o in cfg.items()
+    ) for n, o in cfg.items()
   }
 
-print(networks)
+# import pdb; pdb.set_trace()
+# Write all keywords to txt files
+for name, network in networks.items():
+  all_words = network.get_all_article_title_keywords()
+  with open(f'../{name}.txt', 'w') as f:
+    f.write(all_words)

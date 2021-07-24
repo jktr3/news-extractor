@@ -4,14 +4,18 @@ CNN:
     lambda xml: [{
       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
       'url': e[0].text
-      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
-  article_parser: >-
-    lambda soup: ",".join([e.get_text() for e in soup.find_all("div", {"class":"zn-body__paragraph"})])
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if (('/us' in e[0].text) and ('fast-facts' not in e[0].text)) ]
 FOX:
   sitemap_url: https://www.foxnews.com/sitemap.xml?type=news
   xml_parser: >-
     lambda xml: [{
       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
       'url': e[0].text
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if '/us' in e[0].text]
+MSNBC:
+  sitemap_url: https://www.msnbc.com/sitemap/msnbc/sitemap-news
+  xml_parser: >-
+    lambda xml: [{
+      'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'url': e[0].text
       } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
-  article_parser: >-
