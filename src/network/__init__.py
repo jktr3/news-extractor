@@ -1,6 +1,7 @@
 from webrequests import make_request, parse_xml
 from typing import List, Dict
 from article import Article
+from collections import Counter
 
 class Network:
   def __init__(self, sitemap_url, name, xml_parser) -> None:
@@ -34,5 +35,6 @@ class Network:
 
   def get_all_article_title_keywords(self) -> str:
     if self.articles:
-      return ", ".join([word for sublist in [a.get_clean_title() for a in self.articles] for word in sublist])
+      most_common_terms = set([i[0] for i in Counter([word for sublist in [a.get_clean_title() for a in self.articles] for word in sublist]).most_common(30)])
+      return ", ".join([word for sublist in [a.get_clean_title() for a in self.articles] for word in sublist if word in most_common_terms])
     return ""

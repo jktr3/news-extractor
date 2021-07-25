@@ -6,7 +6,7 @@ from typing import List
 STOP_WORDS = set(stopwords.words('english'))
 
 def clean_text_body(text: str) -> List[str]:
-  word_list = apply_text_regex_rules(text).split(" ")
+  word_list = apply_text_regex_rules(text.strip()).split(" ")
   return [apply_word_regex_rules(w) for w in word_list if (is_stop_word(apply_word_regex_rules(w).lower()) == False)]
 
 
