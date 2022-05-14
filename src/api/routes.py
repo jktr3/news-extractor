@@ -1,7 +1,6 @@
-from cachetools import ttl
 from flask import Blueprint, abort, jsonify
 from jinja2 import TemplateNotFound
-from network import Network
+from objects.network import Network
 from utils import read_yml, timeit
 from typing import Dict
 import cachetools.func
@@ -21,7 +20,7 @@ def retrieve_and_shape_article_keywords() -> Dict[str, str]:
       xml_parser = o['xml_parser'],
       ) for n, o in cfg.items()
     }
-  return {name: network.get_all_article_title_keywords() for name, network in networks.items()}
+  return {name: network.get_all_processed_articles() for name, network in networks.items()}
 
 @headlines.route('/')
 def show():

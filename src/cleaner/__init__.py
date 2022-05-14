@@ -15,10 +15,16 @@ def apply_text_regex_rules(text: str) -> str:
 
 
 def apply_word_regex_rules(text: str) -> str:
+  text = text.replace("&apos;s","")
   return re.sub(r'[\W_]+', '', text)
 
 
 def is_stop_word(text: str) -> bool:
+  # nltk generic stopwords
   if text in STOP_WORDS:
     return True
+  # stopwords in context of news headlines
+  if text in ['opinion','says','know','amid','new']:
+    return True
+
   return False

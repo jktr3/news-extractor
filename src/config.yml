@@ -3,33 +3,22 @@ CNN:
   xml_parser: >-
     lambda xml: [{
       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
       'url': e[0].text
-      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if (('/politics' in e[0].text) and ('fast-facts' not in e[0].text)) ]
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if ('fast-facts' not in e[0].text) ]
 FOX:
   sitemap_url: https://www.foxnews.com/sitemap.xml?type=news
   xml_parser: >-
     lambda xml: [{
       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
       'url': e[0].text
-      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if '/politics' in e[0].text]
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
 MSNBC:
   sitemap_url: https://www.msnbc.com/sitemap/msnbc/sitemap-news
   xml_parser: >-
     lambda xml: [{
       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
       'url': e[0].text
       } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
-Newsmax:
-  sitemap_url: https://www.newsmax.com/sitemaps/google_news_politics.xml
-  xml_parser: >-
-    lambda xml: [{
-      'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
-      'url': e[0].text
-      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
-NBC:
-  sitemap_url: https://www.nbcnews.com/sitemap/nbcnews/sitemap-news
-  xml_parser: >-
-    lambda xml: [{
-      'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
-      'url': e[0].text
-      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if '/politics' in e[0].text]

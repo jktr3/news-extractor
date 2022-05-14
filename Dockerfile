@@ -6,5 +6,4 @@ COPY src/ .
 # Download nltk dependenceies
 RUN [ "python", "-c", "import nltk; nltk.download('stopwords')" ]
 # command to run on container start
-EXPOSE 8000
-CMD [ "python", "/app/wsgi.py" ]
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]
