@@ -5,5 +5,5 @@ RUN pip install -r requirements.txt
 COPY backend/ .
 # Download nltk dependenceies
 RUN [ "python", "-c", "import nltk; nltk.download('stopwords')" ]
-EXPOSE 8080
-CMD ["gunicorn", "-b", ":8080", "wsgi:app"]
+EXPOSE 8073
+CMD ["gunicorn", "-b", ":8073", "wsgi:app"]

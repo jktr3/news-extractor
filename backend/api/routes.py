@@ -22,7 +22,7 @@ def retrieve_and_shape_article_keywords() -> Dict[str, str]:
     }
   return {name: network.get_all_processed_articles() for name, network in networks.items()}
 
-@headlines.route('/')
+@headlines.route('/api/news')
 def show():
   try:
     article_headlines = retrieve_and_shape_article_keywords()
