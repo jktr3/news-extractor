@@ -1,0 +1,35 @@
+FOX:
+  sitemap_url: https://www.foxnews.com/sitemap.xml?type=news
+  xml_parser: >-
+    lambda xml: [{
+      'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'section': e[0].text.split('/')[-2],
+      'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
+      'url': e[0].text
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if ('sports' not in e[0].text)]
+CNN:
+  sitemap_url: https://www.cnn.com/sitemaps/cnn/news.xml
+  xml_parser: >-
+    lambda xml: [{
+      'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+      'section': e[0].text.split('/')[-3],
+      'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
+      'url': e[0].text
+      } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url') if ('fast-facts' not in e[0].text) ]
+# MSNBC:
+#   sitemap_url: https://www.msnbc.com/sitemap/msnbc/sitemap-news
+#   xml_parser: >-
+#     lambda xml: [{
+#       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+#       'section': e[0].text,
+#       'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
+#       'url': e[0].text
+#       } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]
+# WSJ:
+#   sitemap_url: https://www.wsj.com/wsjsitemaps/wsj_google_news.xml
+#   xml_parser: >-
+#     lambda xml: [{
+#       'title': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[2].text,
+#       'publication_date': e.find('{http://www.google.com/schemas/sitemap-news/0.9}news')[1].text,
+#       'url': e[0].text
+#       } for e in xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')]

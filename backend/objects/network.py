@@ -18,12 +18,15 @@ class Network:
 
 
   def get_sitemap_articles(self) -> List[Dict[str, str]]:
+    if self.name == "WSJ":
+      import pdb; pdb.set_trace()
     return eval(self.xml_parser)(self.xml)
 
 
   def set_articles(self):
     a = [Article(
       title=a['title'],
+      section=a['section'],
       url=a['url'],
       publication_date=a['publication_date'],
       ) for a in self.get_sitemap_articles()]
@@ -53,21 +56,12 @@ class Network:
 
             most_common_map[kw]["frequency"] = most_common_map[kw]['count'] / len(self.articles)
 
-      # Count the relative frequency of term counts as percentage of entire news sitemap
-
-      # import pdb; pdb.set_trace()
-
-
-
-
-
-      # critical_key_words_for_word_cloud = [word for sublist in [a.get_article_keywords() for a in self.articles] for word in sublist if word in most_common_terms]
-
       return {
         'most_common_keywords': most_common_map,
         'articles': [
           {
             'title': a.title,
+            'section': a.section,
             'date': a.publication_date,
             'url': a.url,
             'keywords': a.get_article_keywords()

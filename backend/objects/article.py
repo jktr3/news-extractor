@@ -2,9 +2,10 @@ from cleaner import clean_text_body
 
 
 class Article:
-  def __init__(self, title, url, publication_date) -> None:
+  def __init__(self, title, url, publication_date, section) -> None:
     self.title = title
     self.url = url
+    self.section = section
     self.publication_date = publication_date
 
 
